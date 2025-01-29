@@ -18,7 +18,7 @@ export const Tile: React.FC<TileProps> = ({ color, isEmpty, onClick, disabled })
         min-h-[50px]
       `}
       style={{ 
-        backgroundColor: isEmpty ? undefined : color,
+        backgroundColor: isEmpty ? '#e5e7eb' : color,
         aspectRatio: '1/1'
       }}
       onClick={!isEmpty && !disabled ? onClick : undefined}
