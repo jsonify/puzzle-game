@@ -30,7 +30,7 @@ type GameAction =
   | { type: 'SOLVE_ALL_BUT_LAST' }
   | { type: 'SET_WON' };
 
-interface GameContextType {
+export interface GameContextType {
   state: GameState;
   setMode: (mode: GameMode) => void;
   handleTileClick: (position: Position) => void;
@@ -110,7 +110,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 }
 
 // Context
-const GameContext = createContext<GameContextType | null>(null);
+export const GameContext = createContext<GameContextType | null>(null);
 
 // Provider
 export const GameProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
