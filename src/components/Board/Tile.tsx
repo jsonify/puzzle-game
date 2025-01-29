@@ -12,7 +12,7 @@ export const Tile: React.FC<TileProps> = ({ color, isEmpty, onClick, disabled })
   return (
     <button
       className={`
-        w-full aspect-square rounded-lg transition-opacity duration-200
+        w-full h-full rounded-lg transition-all duration-200
         ${isEmpty ? 'bg-gray-200 cursor-default' : 'hover:opacity-90'}
         ${disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
       `}

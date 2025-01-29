@@ -1,4 +1,3 @@
-// src/components/Board/Board.tsx
 import React from 'react';
 import { Tile as TileComponent } from './Tile';
 import { Position, Tile } from '../../services/gameLogic';
@@ -21,23 +20,29 @@ export const Board: React.FC<BoardProps> = ({ mode, board: propBoard }) => {
   };
 
   return (
-    <div className="grid grid-cols-5 gap-2 bg-white p-6 rounded-xl w-full max-w-lg aspect-square">
-      {board.map((row, rowIndex) => (
-        row.map((tile, colIndex) => (
-          <TileComponent
-            key={`${rowIndex}-${colIndex}`}
-            color={tile.color}
-            isEmpty={tile.isEmpty}
-            onClick={canInteract ? () => handleClick({ row: rowIndex, col: colIndex }) : undefined}
-            disabled={mode === 'main' && !tile.isEmpty && !canMoveTile({ row: rowIndex, col: colIndex }, state.emptyPosition)}
-          />
-        ))
-      ))}
+    <div className="w-full bg-white rounded-xl p-4 shadow-md">
+      <div className="grid grid-cols-5 gap-2 aspect-square">
+        {board.map((row, rowIndex) => 
+          row.map((tile, colIndex) => (
+            <div 
+              key={`${rowIndex}-${colIndex}`} 
+              className="w-full aspect-square"
+            >
+              <TileComponent
+                color={tile.color}
+                isEmpty={tile.isEmpty}
+                onClick={() => handleClick({ row: rowIndex, col: colIndex })}
+                disabled={mode === 'main' && !tile.isEmpty && !canMoveTile({ row: rowIndex, col: colIndex }, state.emptyPosition)}
+              />
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
 
-// Helper function moved from gameLogic.ts
+// Helper function
 const canMoveTile = (position: Position, emptyPosition: Position): boolean => {
   return (position.row === emptyPosition.row || position.col === emptyPosition.col) &&
          !(position.row === emptyPosition.row && position.col === emptyPosition.col);
