@@ -1,6 +1,7 @@
+// src/hooks/useMultiplayer.ts
 import { useContext, useEffect } from 'react';
 import { MultiplayerContext } from '../context/MultiplayerContext';
-import { socket } from '../services/socket';
+import type { Tile } from '../types';
 
 export const useMultiplayer = () => {
   const context = useContext(MultiplayerContext);
@@ -9,7 +10,40 @@ export const useMultiplayer = () => {
     throw new Error('useMultiplayer must be used within a MultiplayerProvider');
   }
 
+  const {
+    isConnected,
+    currentRoom,
+    username,
+    players,
+    opponent,
+    isGameActive,
+    gameState,
+    opponentBoard,
+    setUsername,
+    findGame,
+    challengePlayer,
+    acceptChallenge,
+    declineChallenge,
+    handleMove,
+    handleWin
+  } = context;
+
   return {
-    // Multiplayer state and methods
+    isConnected,
+    currentRoom,
+    username,
+    players,
+    opponent,
+    isGameActive,
+    gameState,
+    opponentBoard,
+    setUsername,
+    findGame,
+    challengePlayer,
+    acceptChallenge,
+    declineChallenge,
+    handleMove,
+    handleWin
   };
 };
+
