@@ -15,8 +15,12 @@ export const Tile: React.FC<TileProps> = ({ color, isEmpty, onClick, disabled })
         flex items-center justify-center
         ${isEmpty ? 'bg-gray-200' : ''}
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 cursor-pointer'}
+        min-h-[50px]
       `}
-      style={{ backgroundColor: isEmpty ? undefined : color }}
+      style={{ 
+        backgroundColor: isEmpty ? undefined : color,
+        aspectRatio: '1/1'
+      }}
       onClick={!isEmpty && !disabled ? onClick : undefined}
       disabled={disabled || isEmpty}
     />

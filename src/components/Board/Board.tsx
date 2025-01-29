@@ -22,13 +22,17 @@ export const Board: React.FC<BoardProps> = ({ mode, board: propBoard }) => {
   // Different width classes based on mode
   const containerWidth = mode === 'solution' ? 'max-w-md' : 'max-w-2xl';
 
+  // Flatten the board array for easier mapping
+  const tiles = board.flat();
+
   return (
     <div className={`w-full ${containerWidth} mx-auto`}>
       <div className="bg-white rounded-xl p-4 shadow-md">
-        {/* Explicit grid container */}
         <div className="grid grid-cols-5 gap-2 w-full">
-          {board.map((row, rowIndex) => 
-            row.map((tile, colIndex) => (
+          {tiles.map((tile, index) => {
+            const rowIndex = Math.floor(index / 5);
+            const colIndex = index % 5;
+            return (
               <div 
                 key={`${rowIndex}-${colIndex}`} 
                 className="aspect-square w-full" // Force square aspect ratio
@@ -41,8 +45,8 @@ export const Board: React.FC<BoardProps> = ({ mode, board: propBoard }) => {
                     !canMoveTile({ row: rowIndex, col: colIndex }, state.emptyPosition))}
                 />
               </div>
-            ))
-          )}
+            );
+          })}
         </div>
       </div>
     </div>
