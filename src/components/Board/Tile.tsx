@@ -1,4 +1,3 @@
-// src/components/Board/Tile.tsx
 import React from 'react';
 
 interface TileProps {
@@ -13,13 +12,13 @@ export const Tile: React.FC<TileProps> = ({ color, isEmpty, onClick, disabled })
     <button
       className={`
         w-full h-full rounded-lg transition-all duration-200
-        ${isEmpty ? 'bg-gray-200 cursor-default' : 'hover:opacity-90'}
-        ${disabled ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}
+        flex items-center justify-center
+        ${isEmpty ? 'bg-gray-200' : ''}
+        ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 cursor-pointer'}
       `}
       style={{ backgroundColor: isEmpty ? undefined : color }}
       onClick={!isEmpty && !disabled ? onClick : undefined}
       disabled={disabled || isEmpty}
-      aria-label={isEmpty ? 'Empty tile' : 'Puzzle tile'}
     />
   );
 };
