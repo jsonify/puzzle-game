@@ -9,6 +9,12 @@ export default {
       aspectRatio: {
         'square': '1 / 1',
       },
+      gridTemplateColumns: {
+        '5': 'repeat(5, minmax(0, 1fr))',
+      },
+      gridTemplateRows: {
+        '5': 'repeat(5, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [],

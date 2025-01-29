@@ -28,7 +28,7 @@ export const Board: React.FC<BoardProps> = ({ mode, board: propBoard }) => {
   return (
     <div className={`w-full ${containerWidth} mx-auto p-4`}>
       <div className="bg-white rounded-xl p-4 shadow-md">
-        <div className="grid grid-cols-5 grid-rows-5 gap-2 aspect-square w-full">
+        <div className="grid grid-cols-5 grid-rows-5 gap-2 w-full h-full">
           {tiles.map((tile, index) => {
             const rowIndex = Math.floor(index / 5);
             const colIndex = index % 5;
