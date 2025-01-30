@@ -1,3 +1,18 @@
+// src/components/Game.tsx
+// import React from 'react';
+// import TestGrid from './Test/TestGrid';
+
+// export const Game: React.FC = () => {
+//   return (
+//     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+//       <TestGrid />
+//     </div>
+//   );
+// };
+
+
+
+
 import React from 'react';
 import { Board } from './Board/Board';
 import { GameControls } from './GameControls/GameControls';
@@ -7,34 +22,39 @@ import { PlayerList } from './Multiplayer/PlayerList';
 import { useGameState } from '../hooks/useGameState';
 import { SolutionBoard } from './Board/SolutionBoard';
 
-export const Game = () => {
+export const Game: React.FC = () => {
   const gameState = useGameState();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <Menu />
       
-      <div className="container mx-auto max-w-7xl">
+      <div className="flex flex-col items-center gap-5 p-8">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">
+          Sliding Puzzle Race
+        </h1>
+
         {gameState.state.mode === 'single' ? (
-          <div className="flex flex-col items-center space-y-8 w-full">
-            <div className="w-full max-w-2xl"> {/* Added width constraint */}
+          <div className="flex flex-col items-center gap-8">
+            {/* Main Board */}
+            <div className="w-[500px] h-[500px]">
               <Board mode="main" />
             </div>
-            
-            <div className="w-full max-w-2xl"> {/* Added width constraint */}
-              <GameControls />
-            </div>
-            
-            <div className="w-full max-w-xl"> {/* Smaller width for solution board */}
+
+            {/* Controls */}
+            <GameControls />
+
+            {/* Solution Board */}
+            <div className="w-[250px] h-[250px]">
               <SolutionBoard />
             </div>
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:flex-1">
+          <div className="flex gap-8">
+            <div className="flex-1">
               <GameRoom />
             </div>
-            <div className="lg:w-80">
+            <div className="w-80">
               <PlayerList />
             </div>
           </div>

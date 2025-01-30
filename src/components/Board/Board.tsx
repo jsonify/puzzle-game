@@ -1,4 +1,3 @@
-// src/components/Board/Board.tsx
 import React from 'react';
 import { Tile as TileComponent } from './Tile';
 import { Position, Tile } from '../../services/gameLogic';
@@ -20,34 +19,36 @@ export const Board: React.FC<BoardProps> = ({ mode, board: propBoard }) => {
     handleTileClick(position);
   };
 
-  // Different scale classes based on mode
-  const containerScale = mode === 'solution' 
-    ? 'w-full max-w-sm' 
-    : 'w-full max-w-2xl';
+  // Different width classes based on mode
+  const containerWidth = mode === 'solution' ? 'max-w-md' : 'max-w-2xl';
+
+  // Flatten the board array for easier mapping
+  const tiles = board.flat();
 
   return (
-    <div className={`${containerScale} mx-auto`}>
-      <div className="bg-white rounded-xl p-4 shadow-md">
-        <div className="relative w-full pb-[100%]">
-          <div className="absolute inset-0">
-            <div className="grid grid-cols-5 grid-rows-5 gap-2 w-full h-full">
-              {board.flat().map((tile, index) => {
-                const rowIndex = Math.floor(index / 5);
-                const colIndex = index % 5;
-                return (
-                  <div key={`${rowIndex}-${colIndex}`} className="relative">
-                    <TileComponent
-                      color={tile.color}
-                      isEmpty={tile.isEmpty}
-                      onClick={() => handleClick({ row: rowIndex, col: colIndex })}
-                      disabled={!canInteract || (mode === 'main' && !tile.isEmpty && 
-                        !canMoveTile({ row: rowIndex, col: colIndex }, state.emptyPosition))}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+    <div className="w-full">
+      <div className="bg-white rounded-xl p-4 shadow-md max-w-[600px] mx-auto">
+        <div className="grid grid-cols-5 gap-1 w-full">
+          {tiles.map((tile, index) => {
+            const rowIndex = Math.floor(index / 5);
+            const colIndex = index % 5;
+            return (
+              <div
+                key={`${rowIndex}-${colIndex}`}
+                className="aspect-square"
+              >
+                <div className="w-full h-full">
+                  <TileComponent
+                    color={tile.color}
+                    isEmpty={tile.isEmpty}
+                    onClick={() => handleClick({ row: rowIndex, col: colIndex })}
+                    disabled={!canInteract || (mode === 'main' && !tile.isEmpty && 
+                      !canMoveTile({ row: rowIndex, col: colIndex }, state.emptyPosition))}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
